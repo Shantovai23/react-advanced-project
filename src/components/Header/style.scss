@@ -21,3 +21,25 @@ img{
     width: 100%;
     margin: 0;
 }
+
+.callToAction{
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    text-transform: uppercase;
+}
+ul,li{
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}
+a{
+    font-size: 1.8rem;
+    color: black;
+    line-height: 0;
+    text-transform: uppercase;
+    text-decoration: none;
+}

@@ -1,16 +1,27 @@
 import React from 'react'
 import './default.scss'
-import Header from './components/Header/index'
-import Section from './pages/Homepage/index'
+import {Switch,Route} from 'react-router-dom'
+import Registration from './pages/registration/index'
+import HomePage from './pages/Homepage/index'
+import MainLayout from './layouts/MainLayout'
+
 
 
 function App() {
   return (
     <div className="App">
-    <Header/>
-    <div className="main">
-     <Section/>
-    </div>
+    <Switch>
+     <Route exact  path='/' render={()=>(
+       <MainLayout>
+         <HomePage/>
+       </MainLayout>
+     )} />
+     <Route path='/registration' render={()=>(
+       <MainLayout>
+         <Registration/>
+       </MainLayout>
+     )} />
+     </Switch>
     </div>
   );
 }
