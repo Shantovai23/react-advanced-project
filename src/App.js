@@ -25,7 +25,7 @@ class App extends Component {
   componentDidMount() {
     this.authListener = auth.onAuthStateChanged( async userAuth => {
       if(userAuth){
-        const userRef = await handleUserProfile(userAuth);
+        const userRef = await handleUserProfile({userAuth})
         userRef.onSnapshot(snapshot=>{
           this.setState({
             currentUser:{
