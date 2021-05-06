@@ -1,13 +1,16 @@
 import React, { Component } from "react";
+import {Link} from 'react-router-dom'
 import "./style.scss";
 import Button from "../forms/Buttons/index";
 import { signInWithGoogle ,auth} from "../../firebase/utils";
 import FormInput from "../forms/FormInput/index";
 import Buttons from "../forms/Buttons/index";
+import AuthWrapper from '../AuthWrapper/index'
 
 const initialState = {
   email: "",
   password: "",
+  errors:[]
 };
 
 class SignIn extends Component {
@@ -38,16 +41,31 @@ class SignIn extends Component {
     })
     }catch(err){
         console.log(err);
+        const err3=['Invalid Email/Password']
+        this.setState({
+          errors:err3
+        })
     }
   };
   render() {
-    const { email, password } = this.state;
+    const { email, password ,errors} = this.state;
+    const configAuthWrapper={
+      headline:'Login'
+    }
     return (
-      <div className="signin">
-        <div className="wrap">
-          <h3 className="login">Login</h3>
+      
+          <AuthWrapper {...configAuthWrapper}>
 
           <div className="formwrap">
+           {errors.length>0 && (
+             <ul>
+               {errors.map((val,index)=>(
+                 <li key={index}>
+                   {val}
+                 </li>
+               ))}
+             </ul>
+           )}
             <form onSubmit={this.handleSubmit}>
               <FormInput
                 type="email"
@@ -75,10 +93,15 @@ class SignIn extends Component {
                   </Button>
                 </div>
               </div>
+
+              <div className="links">
+                <Link to='/recovery'>
+                 Forgot Password ?
+                </Link>
+              </div>
             </form>
           </div>
-        </div>
-      </div>
+          </AuthWrapper>
     );
   }
 }
